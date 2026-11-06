@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: camera-casa-diamantes
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: ADMIN_USER
+        value: admin
+      - key: ADMIN_PASSWORD
+        generateValue: true
+      - key: DEVICE_TOKEN
+        generateValue: true
+      - key: ALERT_COOLDOWN_SECONDS
+        value: 120
+      - key: PIXEL_THRESHOLD
+        value: 32
+      - key: MOTION_THRESHOLD
+        value: 0.13

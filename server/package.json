@@ -1,0 +1,12 @@
+{
+  "name": "esp32cam-seguranca", "version": "1.0.0", "private": true, "type": "module",
+  "engines": {"node": ">=20"},
+  "scripts": {"start": "node index.js"},
+  "dependencies": {
+    "@whiskeysockets/baileys": "6.7.24",
+    "express": "^4.21.2",
+    "pino": "^9.6.0",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.34.2"
+  }
+}
