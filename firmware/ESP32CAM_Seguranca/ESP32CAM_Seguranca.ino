@@ -47,7 +47,7 @@ void loadConfig() {
   wifiSsid[1] = prefs.getString("ssid2", "");
   wifiPass[1] = prefs.getString("pass2", "");
   serverUrl = prefs.getString("url", "https://camera-casa-diamantes.onrender.com");
-  deviceToken = prefs.getString("token", "");
+  deviceToken = prefs.getString("token", "camera-diamantes-token-2026");
   prefs.end();
   serverUrl.trim();
   while (serverUrl.endsWith("/")) serverUrl.remove(serverUrl.length()-1);
