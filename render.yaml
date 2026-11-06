@@ -13,9 +13,9 @@ services:
       - key: ADMIN_USER
         value: admin
       - key: ADMIN_PASSWORD
-        generateValue: true
+        value: CasaDiamantes2026
       - key: DEVICE_TOKEN
-        generateValue: true
+        value: camera-diamantes-token-2026
       - key: ALERT_COOLDOWN_SECONDS
         value: 120
       - key: PIXEL_THRESHOLD
