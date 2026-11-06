@@ -1,6 +1,7 @@
 node_modules/
-data/
-server/data/
 .env
 *.log
+data/
+server/data/
+config_local.h
 .DS_Store

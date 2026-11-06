@@ -8,6 +8,15 @@
 #include <HTTPClient.h>
 #include <WebServer.h>
 #include <Preferences.h>
+// Configuracao incorporada: este sketch nao precisa de arquivo .h extra
+// ARQUIVO PRIVADO - NAO PUBLICAR NO GITHUB
+#define DEFAULT_WIFI_SSID "casa"
+#define DEFAULT_WIFI_PASS "SENHA_WIFI_AQUI"
+#define DEFAULT_WIFI2_SSID ""
+#define DEFAULT_WIFI2_PASS ""
+#define DEFAULT_SERVER_URL "https://camera-casa-diamantes.onrender.com"
+#define DEFAULT_DEVICE_TOKEN "TOKEN_IGUAL_AO_RENDER"
+
 
 #define PWDN_GPIO_NUM 32
 #define RESET_GPIO_NUM -1
@@ -34,7 +43,7 @@ int currentNetwork = -1;
 uint32_t lastAttempt = 0;
 uint32_t lastFrame = 0;
 uint32_t lastWifiCheck = 0;
-const uint32_t FRAME_INTERVAL_MS = 900; // ~1 fps, not continuous HD video
+const uint32_t FRAME_INTERVAL_MS = 1800; // ~1 fps, not continuous HD video
 const uint32_t WIFI_RETRY_MS = 15000;
 String htmlEscape(String s) {
   s.replace("&", "&amp;"); s.replace("<", "&lt;"); s.replace(">", "&gt;");
@@ -42,12 +51,12 @@ String htmlEscape(String s) {
 }
 void loadConfig() {
   prefs.begin("security", true);
-  wifiSsid[0] = prefs.getString("ssid1", "");
-  wifiPass[0] = prefs.getString("pass1", "");
-  wifiSsid[1] = prefs.getString("ssid2", "");
-  wifiPass[1] = prefs.getString("pass2", "");
-  serverUrl = prefs.getString("url", "https://camera-casa-diamantes.onrender.com");
-  deviceToken = prefs.getString("token", "camera-diamantes-token-2026");
+  wifiSsid[0] = String(DEFAULT_WIFI_SSID);
+  wifiPass[0] = String(DEFAULT_WIFI_PASS);
+  wifiSsid[1] = String(DEFAULT_WIFI2_SSID);
+  wifiPass[1] = String(DEFAULT_WIFI2_PASS);
+  serverUrl = String(DEFAULT_SERVER_URL);
+  deviceToken = String(DEFAULT_DEVICE_TOKEN);
   prefs.end();
   serverUrl.trim();
   while (serverUrl.endsWith("/")) serverUrl.remove(serverUrl.length()-1);
@@ -153,6 +162,7 @@ void setup() {
   loadConfig();
   if (digitalRead(CONFIG_PIN) == LOW || wifiSsid[0].isEmpty() || serverUrl.isEmpty() || deviceToken.isEmpty()) startPortal();
   WiFi.mode(WIFI_STA); WiFi.setAutoReconnect(true); WiFi.persistent(false);
+  WiFi.setSleep(false);
   if (!startCamera()) {delay(3000); ESP.restart();}
   connectWifi();
 }

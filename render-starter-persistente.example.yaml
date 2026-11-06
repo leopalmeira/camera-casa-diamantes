@@ -1,0 +1,29 @@
+# OPCIONAL: plano pago, não aplique sem aceitar a cobrança no Render.
+services:
+  - type: web
+    name: camera-casa-diamantes
+    runtime: node
+    plan: starter
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    disk:
+      name: camera-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data
+      - key: PUBLIC_URL
+        value: https://camera-casa-diamantes.onrender.com
+      - key: TZ
+        value: America/Sao_Paulo
+      - key: DEVICE_TOKEN
+        sync: false
+      - key: ADMIN_USER
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false

@@ -8,18 +8,17 @@ services:
     startCommand: npm start
     healthCheckPath: /health
     envVars:
-      - key: NODE_VERSION
-        value: 20
-      - key: ADMIN_USER
-        value: admin
-      - key: ADMIN_PASSWORD
-        value: CasaDiamantes2026
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /tmp/camera-data
+      - key: PUBLIC_URL
+        value: https://camera-casa-diamantes.onrender.com
+      - key: TZ
+        value: America/Sao_Paulo
       - key: DEVICE_TOKEN
-        value: camera-diamantes-token-2026
-      - key: ALERT_COOLDOWN_SECONDS
-        value: 120
-      - key: PIXEL_THRESHOLD
-        value: 32
-      - key: MOTION_THRESHOLD
-        value: 0.13
-
+        sync: false
+      - key: ADMIN_USER
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
